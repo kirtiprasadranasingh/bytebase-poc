@@ -13,7 +13,7 @@ jobs:
   create-rollout:
     runs-on: ubuntu-latest
     container:
-      image: bytebase/bytebase-action
+      image: bytebase/bytebase-action:3.19.1
     steps:
       - uses: actions/checkout@v4
       - name: Create rollout
