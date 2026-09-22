@@ -23,5 +23,5 @@ jobs:
             --service-account="github@service.bytebase.com" \
             --service-account-secret=$BYTEBASE_TOKEN \
             --project=$BYTEBASE_PROJECT \
-            --targets=instances/railway-prod-kqzn/databases/proddb \
+            --targets=instances/railway-prod-hqjn/databases/proddb \
             --file-pattern=migrations/*.sql
