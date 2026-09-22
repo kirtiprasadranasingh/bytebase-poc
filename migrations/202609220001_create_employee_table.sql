@@ -4,3 +4,5 @@ CREATE TABLE employees (
     last_name VARCHAR(50) NOT NULL,
     hire_date DATE NOT NULL
 );
+
+-- this is a test commit to trigger the workflow
