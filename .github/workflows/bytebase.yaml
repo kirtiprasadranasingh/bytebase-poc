@@ -4,7 +4,7 @@ on:
     branches: ["main"]
     paths: ["migrations/*.sql"]
 env:
-  BYTEBASE_URL: https://15af3838fdf732.lhr.life
+  BYTEBASE_URL: https://thickness-depot-dns-motherboard.trycloudflare.com
   BYTEBASE_WORKLOAD_IDENTITY: github-actions@new-project-ufnu.workload.bytebase.com
   BYTEBASE_PROJECT: projects/new-project-ufnu
 jobs:
