@@ -22,5 +22,5 @@ jobs:
             --url=$BYTEBASE_URL \
             --access-token=$BYTEBASE_TOKEN \
             --project=$BYTEBASE_PROJECT \
-            -targets=instances/railway-prod-kqzn/databases/proddb \
+            --targets=instances/railway-prod-kqzn/databases/proddb \
             --file-pattern=migrations/*.sql
