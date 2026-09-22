@@ -20,7 +20,7 @@ jobs:
         run: |
           bytebase-action rollout \
             --url=$BYTEBASE_URL \
-            --access-token=$BYTEBASE_TOKEN \
+            ----service-account="github@service.bytebase.com" \ --service-account-secret=$BYTEBASE_TOKEN \
             --project=$BYTEBASE_PROJECT \
             --targets=instances/railway-prod-kqzn/databases/proddb \
             --file-pattern=migrations/*.sql
