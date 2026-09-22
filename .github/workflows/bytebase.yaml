@@ -4,7 +4,7 @@ on:
     branches: ["main"]
     paths: ["migrations/*.sql"]
 env:
-  BYTEBASE_URL: https://showman-dental-election.ngrok-free.dev
+  BYTEBASE_URL: https://irind-103-182-10-176.free.pinggy.net
   BYTEBASE_WORKLOAD_IDENTITY: github-actions@new-project-ufnu.workload.bytebase.com
   BYTEBASE_PROJECT: projects/new-project-ufnu
 jobs:
