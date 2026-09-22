@@ -5,4 +5,4 @@ CREATE TABLE employees (
     hire_date DATE NOT NULL
 );
 
--- this is a test commit to trigger the workflow
+-- this is a test2 commit to trigger the workflow
