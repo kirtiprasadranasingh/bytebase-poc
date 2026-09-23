@@ -3,10 +3,12 @@ on:
   push:
     branches: ["main"]
     paths: ["migrations/*.sql"]
+
 env:
   BYTEBASE_URL: "http://187.127.120.202:8080"
   BYTEBASE_TOKEN: "bbs_XKqZxriXIch9MtK8H0Sv"
   BYTEBASE_PROJECT: "projects/gitops-lvtr"
+
 jobs:
   create-rollout:
     runs-on: ubuntu-latest
@@ -18,7 +20,7 @@ jobs:
         run: |
           bytebase-action rollout \
             --url=$BYTEBASE_URL \
-            --service-account="github-bot@service.bytebase.com"
+            --service-account="github-bot@service.bytebase.com" \
             --service-account-secret=$BYTEBASE_TOKEN \
             --project=$BYTEBASE_PROJECT \
             --targets=instances/postgres-target-zqqc/databases/proddb \
