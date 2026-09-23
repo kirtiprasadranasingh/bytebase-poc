@@ -18,7 +18,7 @@ jobs:
         run: |
           bytebase-action rollout \
             --url=$BYTEBASE_URL \
-            --service-account="github-bot@enlightlab.com" \
+            --service-account="github-bot@service.bytebase.com"
             --service-account-secret=$BYTEBASE_TOKEN \
             --project=$BYTEBASE_PROJECT \
             --targets=instances/postgres-target-zqqc/databases/proddb \
