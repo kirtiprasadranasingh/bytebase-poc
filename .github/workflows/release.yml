@@ -7,38 +7,7 @@ env:
   BYTEBASE_URL: https://data-control.enlightlab.com
   BYTEBASE_PROJECT: projects/gitops-lvtr
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build
-        run: echo "Building..."
-  create-rollout:
-    needs: build
-    runs-on: ubuntu-latest
-    container:
-      image: bytebase/bytebase-action:3.19.1
-    outputs:
-      bytebase-plan: ${{ steps.set-output.outputs.plan }}
-    steps:
-      - uses: actions/checkout@v4
-      - name: Create rollout
-        run: |
-          bytebase-action rollout \
-            --url=$BYTEBASE_URL \
-            --service-account="github-ci@service.bytebase.com" \
-            --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} \
-            --project=$BYTEBASE_PROJECT \
-            --targets=instances/postgres-target-zpqs/databases/proddb \
-            --file-pattern="migrations/*.sql" \
-            --output=${{ runner.temp }}/bytebase-metadata.json
-      - name: Set output
-        id: set-output
-        run: |
-          PLAN=$(jq -r .plan ${{ runner.temp }}/bytebase-metadata.json)
-          echo "plan=$PLAN" >> $GITHUB_OUTPUT
   deploy-to-prod:
-    needs: [create-rollout]
     runs-on: ubuntu-latest
     environment: prod
     container:
@@ -52,5 +21,5 @@ jobs:
             --service-account="github-ci@service.bytebase.com" \
             --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} \
             --project=$BYTEBASE_PROJECT \
-            --target-stage=environments/prod \
-            --plan=${{ needs.create-rollout.outputs.bytebase-plan }}
+            --targets=instances/postgres-target-zpqs/databases/proddb \
+            --file-pattern="migrations/*.sql"
