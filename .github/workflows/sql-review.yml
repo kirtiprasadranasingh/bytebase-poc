@@ -22,5 +22,5 @@ jobs:
             --url=$BYTEBASE_URL \
             --access-token=${{ secrets.BYTEBASE_TOKEN }} \
             --project=projects/gitops-lvtr \
-            --targets=instances/postgres-prod/databases/proddb \
+            ---targets=instances/postgres-target-zpqs/databases/proddb
             --file-pattern=migrations/*.sql
