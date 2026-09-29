@@ -17,4 +17,4 @@ jobs:
       - name: SQL Review
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: bytebase-action check --debug --url=$BYTEBASE_URL --service-account="github-ci" --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} --project=projects/gitops-lvtr --targets=instances/postgres-target-zpqs/databases/proddb --file-pattern="migrations/*.sql"
+        run: bytebase-action check --url=$BYTEBASE_URL --service-account="github-ci" --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} --project=projects/gitops-lvtr --targets=instances/postgres-target-zpqs/databases/proddb --file-pattern="migrations/*.sql"
