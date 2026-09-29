@@ -1,0 +1,1 @@
+CREATE TABLE manager_demo (id INT PRIMARY KEY, name VARCHAR(255));
