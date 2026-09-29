@@ -1,0 +1,1 @@
+CREATE TABLE review_test (id INT PRIMARY KEY, name VARCHAR(100));
