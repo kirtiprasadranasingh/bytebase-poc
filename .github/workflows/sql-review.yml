@@ -11,7 +11,7 @@ jobs:
     container:
       image: bytebase/bytebase-action:3.19.1
     env:
-      BYTEBASE_URL: http://data-control.enlightlab.com
+      BYTEBASE_URL: https://data-control.enlightlab.com
     steps:
       - uses: actions/checkout@v4
       - name: SQL Review
