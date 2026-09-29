@@ -23,7 +23,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Create rollout
-        run: bytebase-action rollout --url=$BYTEBASE_URL --service-account="github-ci@service.bytebase.com" --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} --project=$BYTEBASE_PROJECT --targets=instances/postgres-target-zpqs/databases/proddb --file-pattern="migrations/*.sql" --output=${{ runner.temp }}/bytebase-metadata.json
+        run: |
+          bytebase-action rollout \
+            --url=$BYTEBASE_URL \
+            --service-account="github-ci@service.bytebase.com" \
+            --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} \
+            --project=$BYTEBASE_PROJECT \
+            --targets=instances/postgres-target-zpqs/databases/proddb \
+            --file-pattern="migrations/*.sql" \
+            --output=${{ runner.temp }}/bytebase-metadata.json
       - name: Set output
         id: set-output
         run: |
@@ -38,4 +46,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to prod
-        run: bytebase-action rollout --url=$BYTEBASE_URL --service-account="github-ci@service.bytebase.com" --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} --project=$BYTEBASE_PROJECT --target-stage=environments/prod --plan=${{ needs.create-rollout.outputs.bytebase-plan }}
+        run: |
+          bytebase-action rollout \
+            --url=$BYTEBASE_URL \
+            --service-account="github-ci@service.bytebase.com" \
+            --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} \
+            --project=$BYTEBASE_PROJECT \
+            --target-stage=environments/prod \
+            --plan=${{ needs.create-rollout.outputs.bytebase-plan }}
