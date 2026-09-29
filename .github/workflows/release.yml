@@ -4,7 +4,7 @@ on:
     branches: ["main"]
     paths: ["migrations/*.sql"]
 env:
-  BYTEBASE_URL: http://data-control.enlightlab.com
+  BYTEBASE_URL: https://data-control.enlightlab.com
   BYTEBASE_PROJECT: projects/gitops-lvtr
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     container:
-      image: bytebase/bytebase-action
+      image: bytebase/bytebase-action:3.19.1
     outputs:
       bytebase-plan: ${{ steps.set-output.outputs.plan }}
     steps:
@@ -26,10 +26,11 @@ jobs:
         run: |
           bytebase-action rollout \
             --url=$BYTEBASE_URL \
-            --access-token=${{ secrets.BYTEBASE_TOKEN }} \
+            --service-account="github-ci@service.bytebase.com" \
+            --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} \
             --project=$BYTEBASE_PROJECT \
-            --targets=instances/postgres-prod/databases/proddb \
-            --file-pattern=migrations/*.sql \
+            --targets=instances/postgres-target-zpqs/databases/proddb \
+            --file-pattern="migrations/*.sql" \
             --output=${{ runner.temp }}/bytebase-metadata.json
       - name: Set output
         id: set-output
@@ -41,14 +42,15 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     container:
-      image: bytebase/bytebase-action
+      image: bytebase/bytebase-action:3.19.1
     steps:
       - uses: actions/checkout@v4
       - name: Deploy to prod
         run: |
           bytebase-action rollout \
             --url=$BYTEBASE_URL \
-            --access-token=${{ secrets.BYTEBASE_TOKEN }} \
+            --service-account="github-ci@service.bytebase.com" \
+            --service-account-secret=${{ secrets.BYTEBASE_TOKEN }} \
             --project=$BYTEBASE_PROJECT \
             --target-stage=environments/prod \
             --plan=${{ needs.create-rollout.outputs.bytebase-plan }}
