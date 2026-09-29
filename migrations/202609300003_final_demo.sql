@@ -1,0 +1,1 @@
+CREATE TABLE final_demo (id INT PRIMARY KEY);
