@@ -1,0 +1,1 @@
+CREATE TABLE super_final (id INT PRIMARY KEY);
